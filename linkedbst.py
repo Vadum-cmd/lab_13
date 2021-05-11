@@ -5,9 +5,7 @@ Author: Ken Lambert
 from abstractcollection import AbstractCollection
 from bstnode import BSTNode
 from linkedstack import LinkedStack
-from linkedqueue import LinkedQueue
 from math import log
-from random import randint
 
 
 class LinkedBST(AbstractCollection):
@@ -225,9 +223,9 @@ class LinkedBST(AbstractCollection):
         probe = self._root
         while probe != None:
             if probe.data == item:
-                oldData = probe.data
+                old_data = probe.data
                 probe.data = new_item
-                return oldData
+                return old_data
             elif probe.data > item:
                 probe = probe.left
             else:
