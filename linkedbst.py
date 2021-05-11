@@ -7,22 +7,26 @@ from bstnode import BSTNode
 from linkedstack import LinkedStack
 from linkedqueue import LinkedQueue
 from math import log
-from time import time_ns
+from time import time
 from random import randint
 
 
 class LinkedBST(AbstractCollection):
     """An link-based binary search tree implementation."""
     def __init__(self, sourceCollection=None):
-        """Sets the initial state of self, which includes the
-        contents of sourceCollection, if it's present."""
+        """
+        Sets the initial state of self, which includes the
+        contents of sourceCollection, if it's present.
+        """
         self._root = None
         AbstractCollection.__init__(self, sourceCollection)
 
     # Accessor methods
     def __str__(self):
-        """Returns a string representation with the tree rotated
-        90 degrees counterclockwise."""
+        """
+        Returns a string representation with the tree rotated
+        90 degrees counterclockwise.
+        """
         def recurse(node, level):
             s = ""
             if node != None:
@@ -77,8 +81,10 @@ class LinkedBST(AbstractCollection):
         return self.find(item) != None
 
     def find(self, item):
-        """If item matches an item in self, returns the
-        matched item, or None otherwise."""
+        """
+        If item matches an item in self, returns the
+        matched item, or None otherwise.
+        """
 
         def recurse(node):
             if node is None:
@@ -125,9 +131,11 @@ class LinkedBST(AbstractCollection):
         self._size += 1
 
     def remove(self, item):
-        """Precondition: item is in self.
+        """
+        Precondition: item is in self.
         Raises: KeyError if item is not in self.
-        postcondition: item is removed from self."""
+        postcondition: item is removed from self.
+        """
         if not item in self:
             raise KeyError("Item not in tree.""")
 
@@ -213,7 +221,8 @@ class LinkedBST(AbstractCollection):
     def replace(self, item, newItem):
         """
         If item is in self, replaces it with newItem and
-        returns the old item, or returns None otherwise."""
+        returns the old item, or returns None otherwise.
+        """
         probe = self._root
         while probe != None:
             if probe.data == item:
@@ -238,6 +247,7 @@ class LinkedBST(AbstractCollection):
             :param top:
             :return:
             '''
+            # Check if this node even exists.
             if not top:
                 return 0
             else:
@@ -250,7 +260,8 @@ class LinkedBST(AbstractCollection):
         Return True if tree is balanced
         :return:
         '''
-        return self.height() < (2 * log(self._size + 1, 2) - 1)
+        result = self.height() < (2 * log(self._size + 1, 2) - 1)
+        return result
 
     def range_find(self, low, high):
         '''
@@ -270,18 +281,24 @@ class LinkedBST(AbstractCollection):
         Rebalances the tree.
         :return:
         '''
+        # So, we just make temporary list for all the words in our tree.
         temp_lst = [element for element in self]
+        # Make the original one empty.
         self.clear()
-        
+
         def insert_item(temp_lst):
-            middle = len(temp_lst) // 2
+            """
+            This function divides 'temp_lst' by 2 to define the root,
+            then, recursively, adds another nodes to our binary tree.
+            """
+            middle_ind = len(temp_lst) // 2
 
             if len(temp_lst) == 0:
                 return None
 
-            self.add(temp_lst[middle])
-            insert_item(temp_lst[ : middle])
-            insert_item(temp_lst[middle+1 : ])
+            self.add(temp_lst[middle_ind])
+            insert_item(temp_lst[ : middle_ind])
+            insert_item(temp_lst[middle_ind + 1 : ])
 
         insert_item(temp_lst)
         return self
@@ -295,6 +312,7 @@ class LinkedBST(AbstractCollection):
         :return:
         :rtype:
         """
+        # It just must be the bigest number.
         successor = 9999999
         for element in self:
             if element > item and element < successor:
@@ -310,6 +328,7 @@ class LinkedBST(AbstractCollection):
         :return:
         :rtype:
         """
+        # It just must be the smallest number.
         predecessor = -9999999
         for element in self:
             if element < item and element > predecessor:
