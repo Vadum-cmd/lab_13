@@ -346,7 +346,7 @@ class LinkedBST(AbstractCollection):
         # Firs of all we open file using given path.
         # Then we read it's content and put it in list.
         with open(path) as words:
-            words_lst = words.readlines()[:10000]
+            words_lst = words.readlines()[:900]
         length = len(words_lst)
         # Creating an sorted list with our content.
         lst_of_words_sort = list(sorted(words_lst))
@@ -413,7 +413,10 @@ class LinkedBST(AbstractCollection):
             tree_of_words_bal_time += time() - rght_now
 
         # Printing the results.
-        print(f"Sorted list: found 10000 random words in {lst_of_words_sort_time//10**3} miliseconds." )
-        print(f"Unsorted tree: found 10000 random words in {tree_of_words_unsort_time//10**3} miliseconds." )
-        print(f"Sorted tree: found 10000 random words in {tree_of_words_sort_time//10**3} miliseconds." )
-        print(f"Balanced tree: found 10000 random words in {tree_of_words_bal_time//10**3} miliseconds." )
+        print(f"Sorted list: found 10000 random words in {lst_of_words_sort_time * 10**3} miliseconds." )
+        print(f"Unsorted tree: found 10000 random words in {tree_of_words_unsort_time * 10**3} miliseconds." )
+        print(f"Sorted tree: found 10000 random words in {tree_of_words_sort_time * 10**3} miliseconds." )
+        print(f"Balanced tree: found 10000 random words in {tree_of_words_bal_time * 10**3} miliseconds." )
+
+bst = LinkedBST()
+bst.demo_bst('words.txt')
