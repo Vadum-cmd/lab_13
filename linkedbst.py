@@ -148,40 +148,40 @@ class LinkedBST(AbstractCollection):
             Post: top.data = maximum value in top's left subtree.
             """
             parent = top
-            currentNode = top.left
-            while not currentNode.right == None:
-                parent = currentNode
-                currentNode = currentNode.right
-            top.data = currentNode.data
+            current_node = top.left
+            while not current_node.right == None:
+                parent = current_node
+                current_node = current_node.right
+            top.data = current_node.data
             if parent == top:
-                top.left = currentNode.left
+                top.left = current_node.left
             else:
-                parent.right = currentNode.left
+                parent.right = current_node.left
 
         # Begin main part of the method
         if self.isEmpty(): return None
 
         # Attempt to locate the node containing the item
-        itemRemoved = None
-        preRoot = BSTNode(None)
-        preRoot.left = self._root
-        parent = preRoot
+        item_removed = None
+        pre_root = BSTNode(None)
+        pre_root.left = self._root
+        parent = pre_root
         direction = 'L'
-        currentNode = self._root
-        while not currentNode == None:
-            if currentNode.data == item:
-                itemRemoved = currentNode.data
+        current_node = self._root
+        while not current_node == None:
+            if current_node.data == item:
+                item_removed = current_node.data
                 break
-            parent = currentNode
-            if currentNode.data > item:
+            parent = current_node
+            if current_node.data > item:
                 direction = 'L'
-                currentNode = currentNode.left
+                current_node = current_node.left
             else:
                 direction = 'R'
-                currentNode = currentNode.right
+                current_node = current_node.right
 
         # Return None if the item is absent
-        if itemRemoved == None: return None
+        if item_removed == None: return None
 
         # The item is present, so remove its node
 
@@ -189,23 +189,23 @@ class LinkedBST(AbstractCollection):
         #         Replace the node's value with the maximum value in the
         #         left subtree
         #         Delete the maximium node in the left subtree
-        if not currentNode.left == None \
-                and not currentNode.right == None:
-            lift_max_in_left_subtree_to_top(currentNode)
+        if not current_node.left == None \
+                and not current_node.right == None:
+            lift_max_in_left_subtree_to_top(current_node)
         else:
             # Case 2: The node has no left child
-            if currentNode.left == None:
-                newChild = currentNode.right
+            if current_node.left == None:
+                new_child = current_node.right
 
                 # Case 3: The node has no right child
             else:
-                newChild = currentNode.left
+                new_child = current_node.left
 
                 # Case 2 & 3: Tie the parent to the new child
             if direction == 'L':
-                parent.left = newChild
+                parent.left = new_child
             else:
-                parent.right = newChild
+                parent.right = new_child
 
         # All cases: Reset the root (if it hasn't changed no harm done)
         #            Decrement the collection's size counter
@@ -214,19 +214,19 @@ class LinkedBST(AbstractCollection):
         if self.isEmpty():
             self._root = None
         else:
-            self._root = preRoot.left
-        return itemRemoved
+            self._root = pre_root.left
+        return item_removed
 
-    def replace(self, item, newItem):
+    def replace(self, item, new_item):
         """
-        If item is in self, replaces it with newItem and
+        If item is in self, replaces it with new_item and
         returns the old item, or returns None otherwise.
         """
         probe = self._root
         while probe != None:
             if probe.data == item:
                 oldData = probe.data
-                probe.data = newItem
+                probe.data = new_item
                 return oldData
             elif probe.data > item:
                 probe = probe.left
