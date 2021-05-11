@@ -346,7 +346,7 @@ class LinkedBST(AbstractCollection):
         # Firs of all we open file using given path.
         # Then we read it's content and put it in list.
         with open(path) as words:
-            words_lst = words.readlines()[:10000]
+            words_lst = words.readlines()[:900]
         length = len(words_lst)
         # Creating an sorted list with our content.
         lst_of_words_sort = list(sorted(words_lst))
