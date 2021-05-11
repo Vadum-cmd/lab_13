@@ -7,7 +7,6 @@ from bstnode import BSTNode
 from linkedstack import LinkedStack
 from linkedqueue import LinkedQueue
 from math import log
-from time import time
 from random import randint
 
 
