@@ -27,13 +27,13 @@ class LinkedBST(AbstractCollection):
         90 degrees counterclockwise.
         """
         def recurse(node, level):
-            s = ""
+            res = ""
             if node != None:
-                s += recurse(node.right, level + 1)
-                s += "- " * level
-                s += str(node.data) + "\n"
-                s += recurse(node.left, level + 1)
-            return s
+                res += recurse(node.right, level + 1)
+                res += "- " * level
+                res += str(node.data) + "\n"
+                res += recurse(node.left, level + 1)
+            return res
 
         return recurse(self._root, 0)
 
@@ -139,7 +139,7 @@ class LinkedBST(AbstractCollection):
             raise KeyError("Item not in tree.""")
 
         # Helper function to adjust placement of an item
-        def liftMaxInLeftSubtreeToTop(top):
+        def lift_max_in_left_subtree_to_top(top):
             """
             Replace top's datum with the maximum datum in the left subtree
             Pre:  top has a left child
@@ -191,7 +191,7 @@ class LinkedBST(AbstractCollection):
         #         Delete the maximium node in the left subtree
         if not currentNode.left == None \
                 and not currentNode.right == None:
-            liftMaxInLeftSubtreeToTop(currentNode)
+            lift_max_in_left_subtree_to_top(currentNode)
         else:
             # Case 2: The node has no left child
             if currentNode.left == None:
